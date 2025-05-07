@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">DSM Desafio Practico 03</string>
+
+    <!-- Authentication -->
+    <string name="auth_welcome">Bienvenido</string>
+    <string name="auth_exit">Cerrar sesión</string>
+    <string name="auth_bye">Sesión cerrada</string>
+
+    <string name="auth_login_label">Ingreso</string>
+    <string name="auth_login_title">Iniciar sesión</string>
+    <string name="auth_login_action">Ingresar</string>
+    <string name="auth_signup_call">Registrate</string>
+
+    <string name="auth_signup_label">Registro</string>
+    <string name="auth_signup_title">Registrarme</string>
+    <string name="auth_signup_action">Crear cuenta</string>
+    <string name="auth_login_call">Tengo cuenta</string>
+
+    <string name="auth_email_hint">Correo electrónico</string>
+    <string name="auth_pass_hint">Contraseña</string>
+    <string name="auth_check_hint">Confirmar contraseña</string>
+
+    <string name="auth_email_err">Ingrese correo</string>
+    <string name="auth_pass_err">Ingrese contraseña</string>
+    <string name="auth_check_err">Las contraseñas no coinciden</string>
+
+    <!--  -->
 </resources>

@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "998081586308",
+    "firebase_url": "https://dsm-2025-default-rtdb.firebaseio.com",
+    "project_id": "dsm-2025",
+    "storage_bucket": "dsm-2025.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998081586308:android:1532d131ebb53d4bb40ed1",
+        "android_client_info": {
+          "package_name": "edu.udb.dsm.desafio_practico_02"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXOzBR0E38uttnD2Zri1HbFYxQOrnl64Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998081586308:android:63fa43926838825bb40ed1",
+        "android_client_info": {
+          "package_name": "edu.udb.dsm.desafio_practico_03"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXOzBR0E38uttnD2Zri1HbFYxQOrnl64Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998081586308:android:d2b56c132899f694b40ed1",
+        "android_client_info": {
+          "package_name": "edu.udb.dsm.investigacion_practica"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXOzBR0E38uttnD2Zri1HbFYxQOrnl64Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
