@@ -18,5 +18,5 @@ interface ApiService {
     suspend fun updateRecursos(@Path("id") id: Int, @Body recurso: Recurso): Call<Recurso>
 
     @DELETE("recursos/{id}")
-    suspend fun deleteRecursosById(@Path("id") id: Int): Call<Recurso>
+    suspend fun deleteRecursosById(@Path("id") id: Int)
 }

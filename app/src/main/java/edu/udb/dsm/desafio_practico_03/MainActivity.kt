@@ -2,9 +2,17 @@ package edu.udb.dsm.desafio_practico_03
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import edu.udb.dsm.desafio_practico_03.adapter.RecursoAdapter
 import edu.udb.dsm.desafio_practico_03.auth.AuthActivity
 import edu.udb.dsm.desafio_practico_03.auth.LoginActivity
+import edu.udb.dsm.desafio_practico_03.model.Recurso
 import edu.udb.dsm.desafio_practico_03.services.ApiService
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -15,9 +23,30 @@ class MainActivity : AuthActivity() {
     override val activityTitle = R.string.app_name
 
     private lateinit var api: ApiService
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var recursoAdapter: RecursoAdapter
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Inicializar vistas
+        recyclerView = findViewById(R.id.rvRecursos)
+        progressBar = findViewById(R.id.progressBar)
+
+        // Configurar RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recursoAdapter = RecursoAdapter(
+            onEditClick = { recurso ->
+                // Por ahora solo mostramos un Toast
+                Toast.makeText(this, "Editar: ${recurso.titulo}", Toast.LENGTH_SHORT).show()
+            },
+            onDeleteClick = { recurso ->
+                // Mostrar alerta de confirmación para eliminar
+                mostrarDialogoConfirmacion(recurso)
+            }
+        )
+        recyclerView.adapter = recursoAdapter
 
         // Crea una instancia de Retrofit con el cliente OkHttpClient
         val retrofit = Retrofit.Builder()
@@ -36,7 +65,8 @@ class MainActivity : AuthActivity() {
         // early execution for when the app is launched
         authStateListener.onAuthStateChanged(auth)
 
-        obtenerAlumnos()
+        // Cargar los recursos cuando se inicia la actividad
+        cargarRecursos()
     }
 
     override fun onStart() {
@@ -44,16 +74,59 @@ class MainActivity : AuthActivity() {
         if (auth.currentUser === null) return
     }
 
-    private fun obtenerAlumnos() {
+    private fun cargarRecursos() {
+        // Mostrar el indicador de progreso
+        progressBar.visibility = View.VISIBLE
+
         lifecycleScope.launch {
             try {
-                val alumnos = api.getRecursos()
-                // Aquí puedes actualizar tu UI, por ejemplo:
-                alumnos.forEach {
-                    Log.d("MainActivity", "Alumno: ${it.titulo}, ${it.descripcion}")
-                }
+                val recursos = api.getRecursos()
+                // Actualizar el adaptador con los datos obtenidos
+                recursoAdapter.updateRecursos(recursos)
+                Log.d("MainActivity", "Recursos cargados: ${recursos.size}")
+                // Ocultar el indicador de progreso
+                progressBar.visibility = View.GONE
             } catch (e: Exception) {
-                Log.e("MainActivity", "Error al obtener alumnos", e)
+                Log.e("MainActivity", "Error al obtener recursos", e)
+                Toast.makeText(this@MainActivity,
+                    "Error al cargar los recursos: ${e.message}",
+                    Toast.LENGTH_LONG).show()
+                // Ocultar el indicador de progreso
+                progressBar.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun mostrarDialogoConfirmacion(recurso: Recurso) {
+        AlertDialog.Builder(this)
+            .setTitle("Confirmar eliminación")
+            .setMessage("¿Está seguro que desea eliminar el recurso '${recurso.titulo}'?")
+            .setPositiveButton("Sí") { _, _ ->
+                eliminarRecurso(recurso)
+            }
+            .setNegativeButton("No", null)
+            .show()
+    }
+
+    private fun eliminarRecurso(recurso: Recurso) {
+        progressBar.visibility = View.VISIBLE
+
+        lifecycleScope.launch {
+            try {
+                val id = recurso.id.toInt()
+                api.deleteRecursosById(id)
+                Toast.makeText(this@MainActivity,
+                    "Recurso '${recurso.titulo}' eliminado correctamente",
+                    Toast.LENGTH_SHORT).show()
+
+                // Recargar la lista de recursos para ver los cambios
+                cargarRecursos()
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error al eliminar recurso", e)
+                Toast.makeText(this@MainActivity,
+                    "Error al eliminar el recurso: ${e.message}",
+                    Toast.LENGTH_LONG).show()
+                progressBar.visibility = View.GONE
             }
         }
     }
