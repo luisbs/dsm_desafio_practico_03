@@ -12,11 +12,11 @@ interface ApiService {
     suspend fun getRecursosById(@Path("id") id: Int): Call<Recurso>
 
     @POST("recursos")
-    suspend fun createRecursos(@Body recurso: Recurso): Call<Recurso>
+    suspend fun createRecursos(@Body recurso: Recurso)
 
     @PUT("recursos")
     suspend fun updateRecursos(@Path("id") id: Int, @Body recurso: Recurso): Call<Recurso>
 
     @DELETE("recursos/{id}")
-    suspend fun deleteRecursosById(@Path("id") id: Int)
+    suspend fun deleteRecursosById(@Path("id") id: Int)  // Modificado para que no devuelva Call<Recurso>
 }

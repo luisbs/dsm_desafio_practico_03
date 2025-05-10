@@ -1,5 +1,6 @@
 package edu.udb.dsm.desafio_practico_03
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -48,6 +49,12 @@ class MainActivity : AuthActivity() {
         )
         recyclerView.adapter = recursoAdapter
 
+        // Configurar botón para agregar recurso
+        findViewById<View>(R.id.fabAgregarRecurso).setOnClickListener {
+            val intent = Intent(this, CrearRecursoActivity::class.java)
+            startActivity(intent)
+        }
+
         // Crea una instancia de Retrofit con el cliente OkHttpClient
         val retrofit = Retrofit.Builder()
             .baseUrl("https://681d6b31f74de1d219afad4b.mockapi.io/api/v1/")
@@ -69,9 +76,13 @@ class MainActivity : AuthActivity() {
         cargarRecursos()
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (auth.currentUser === null) return
+    override fun onResume() {
+        super.onResume()
+        // Recargar recursos cada vez que la actividad se reanude
+        // (para reflejar posibles cambios después de crear un nuevo recurso)
+        if (auth.currentUser != null) {
+            cargarRecursos()
+        }
     }
 
     private fun cargarRecursos() {
