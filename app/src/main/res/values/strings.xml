@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DSM Desafio Practico 03</string>
+    <string name="app_name">Biblioteca Pública</string>
 
     <!-- Authentication -->
     <string name="auth_welcome">Bienvenido</string>
