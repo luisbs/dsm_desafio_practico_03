@@ -24,5 +24,29 @@
     <string name="auth_pass_err">Ingrese contraseña</string>
     <string name="auth_check_err">Las contraseñas no coinciden</string>
 
-    <!--  -->
+    <!--    -->
+    <string name="resource_title">Título</string>
+    <string name="resource_description">Descripción</string>
+    <string name="resource_type">Tipo</string>
+    <string name="resource_link">Enlace</string>
+    <string name="resource_image">URL de la imagen</string>
+
+    <string name="example_title">Título del Recurso</string>
+    <string name="example_description">Descripción del recurso</string>
+    <string name="example_type">Tipo: PDF</string>
+
+    <!-- activity_main -->
+    <string name="list_title">Mis Recursos</string>
+    <string name="add_action">Agregar recurso</string>
+    <string name="edit_action">Editar</string>
+    <string name="delete_action">Eliminar</string>
+    <string name="cancel_action">Cancelar</string>
+
+    <!-- activity_crear_recurso -->
+    <string name="create_title">Crear Nuevo Recurso</string>
+    <string name="create_action">Guardar</string>
+
+    <!-- activity_actualizar_recurso -->
+    <string name="update_title">Actualizar Recurso</string>
+    <string name="update_action">Actualizar</string>
 </resources>
