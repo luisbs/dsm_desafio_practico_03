@@ -39,8 +39,16 @@ class MainActivity : AuthActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recursoAdapter = RecursoAdapter(
             onEditClick = { recurso ->
-                // Por ahora solo mostramos un Toast
-                Toast.makeText(this, "Editar: ${recurso.titulo}", Toast.LENGTH_SHORT).show()
+                // Navegar a la pantalla de actualización
+                val intent = Intent(this, ActualizarRecursoActivity::class.java).apply {
+                    putExtra(ActualizarRecursoActivity.EXTRA_RECURSO_ID, recurso.id)
+                    putExtra(ActualizarRecursoActivity.EXTRA_RECURSO_TITULO, recurso.titulo)
+                    putExtra(ActualizarRecursoActivity.EXTRA_RECURSO_DESCRIPCION, recurso.descripcion)
+                    putExtra(ActualizarRecursoActivity.EXTRA_RECURSO_TIPO, recurso.tipo)
+                    putExtra(ActualizarRecursoActivity.EXTRA_RECURSO_ENLACE, recurso.enlace)
+                    putExtra(ActualizarRecursoActivity.EXTRA_RECURSO_IMAGEN, recurso.imagen)
+                }
+                startActivity(intent)
             },
             onDeleteClick = { recurso ->
                 // Mostrar alerta de confirmación para eliminar

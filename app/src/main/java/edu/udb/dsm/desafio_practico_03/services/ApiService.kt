@@ -1,7 +1,6 @@
 package edu.udb.dsm.desafio_practico_03.services
 
 import edu.udb.dsm.desafio_practico_03.model.Recurso
-import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
@@ -9,14 +8,14 @@ interface ApiService {
     suspend fun getRecursos(): List<Recurso>
 
     @GET("recursos/{id}")
-    suspend fun getRecursosById(@Path("id") id: Int): Call<Recurso>
+    suspend fun getRecursosById(@Path("id") id: Int): Recurso
 
     @POST("recursos")
     suspend fun createRecursos(@Body recurso: Recurso)
 
-    @PUT("recursos")
-    suspend fun updateRecursos(@Path("id") id: Int, @Body recurso: Recurso): Call<Recurso>
+    @PUT("recursos/{id}")
+    suspend fun updateRecursos(@Path("id") id: Int, @Body recurso: Recurso)
 
     @DELETE("recursos/{id}")
-    suspend fun deleteRecursosById(@Path("id") id: Int)  // Modificado para que no devuelva Call<Recurso>
+    suspend fun deleteRecursosById(@Path("id") id: Int)
 }
